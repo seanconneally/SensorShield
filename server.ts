@@ -62,7 +62,7 @@ If you can't confirm true flashing/strobing from a still image, flag it as 'susp
 Always respond with valid JSON matching the schema exactly.`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: [
           {
             role: 'user',
