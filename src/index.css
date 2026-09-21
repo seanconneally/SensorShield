@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@keyframes flashingAlert {
+  0% { background-color: #dc2626; color: #ffffff; }
+  50% { background-color: #facc15; color: #000000; }
+  100% { background-color: #dc2626; color: #ffffff; }
+}
+
+@keyframes raveStrobe {
+  0% { background-color: #00ffff; color: #000000; }
+  100% { background-color: #ff00ff; color: #ffffff; }
+}
+
+@keyframes raveSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes salePulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.04); opacity: 0.85; }
+}
+
+/* Sensory Shield Injected Mitigations */
+.sensory-shield-pause-motion,
+.sensory-shield-pause-motion * {
+  animation-play-state: paused !important;
+  transition-duration: 0.001s !important;
+}
+
+.sensory-shield-warm-filter {
+  filter: sepia(var(--sensory-warmth, 38%)) brightness(var(--sensory-brightness, 0.88)) contrast(0.92) saturate(0.85) !important;
+  transition: filter 0.3s ease-in-out;
+}
+
+.sensory-shield-desaturate-neon [data-sensory-neon="true"],
+.sensory-shield-desaturate-neon [id*="neon"],
+.sensory-shield-desaturate-neon [class*="neon"] {
+  filter: saturate(0.25) brightness(0.92) !important;
+  box-shadow: none !important;
+  transition: filter 0.25s ease-out;
+}

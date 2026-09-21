@@ -1,0 +1,6 @@
+{
+  "name": "Visual Sensory Shield",
+  "description": "Chrome Extension Track 3: Visual Trigger & Overload Scanner, AI risk screenshot dispatcher, and real-time sensory mitigation injector for photophobia, epilepsy, and sensory processing disorders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

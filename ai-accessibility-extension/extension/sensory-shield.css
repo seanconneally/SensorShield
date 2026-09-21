@@ -1,0 +1,3 @@
+/* Warning controls live in a ShadowRoot to isolate them from page styling.
+   Targeted filters are tracked and restored by sensory-shield.js. */
+#sensory-shield-ui { animation: none !important; transition: none !important; }

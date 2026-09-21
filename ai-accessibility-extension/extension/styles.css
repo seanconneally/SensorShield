@@ -1,0 +1,234 @@
+/* 
+  Inject the OpenDyslexic font. 
+  Note: __MSG_@@extension_id__ is resolved dynamically by Chrome to the extension's unique ID.
+*/
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("chrome-extension://__MSG_@@extension_id__/fonts/OpenDyslexic.otf") format("opentype");
+}
+
+/* 
+  Accessibility Dyslexia Mode
+  We use !important to ensure these styles override the website's default CSS.
+*/
+.accessibility-dyslexia-mode,
+.accessibility-dyslexia-mode * {
+    font-family: "OpenDyslexic", sans-serif !important;
+    line-height: 1.8 !important;
+    letter-spacing: 0.1em !important;
+    word-spacing: 0.2em !important;
+}
+
+.dyslexia-panel {
+    background: #fdfbf7 !important;
+    border: 2px solid #34d399 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin: 16px 0 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    color: #1e293b !important;
+    position: relative !important;
+    z-index: 999999 !important;
+    text-align: left !important;
+}
+
+.dyslexia-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid #a7f3d0 !important;
+}
+
+.dyslexia-title {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: #059669 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+}
+
+.dyslexia-close {
+    background: none !important;
+    border: none !important;
+    color: #64748b !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+    padding: 4px 8px !important;
+}
+
+.dyslexia-close:hover {
+    color: #0f172a !important;
+}
+
+.dyslexia-loading {
+    font-style: italic !important;
+    color: #059669 !important;
+    animation: pulse 1.5s infinite !important;
+}
+
+.dyslexia-bullet {
+    display: flex !important;
+    margin-bottom: 12px !important;
+    font-size: 16px !important;
+    background: #ecfdf5 !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    border-left: 4px solid #10b981 !important;
+}
+
+.dyslexia-paragraph {
+    margin-bottom: 12px !important;
+    font-size: 16px !important;
+}
+
+.dyslexia-error {
+    color: #ef4444 !important;
+    font-size: 14px !important;
+}
+
+.dyslexia-hidden-original {
+    display: none !important;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* ==========================================================================
+   TRACK 3: Visual Sensory Shield Mitigations (Story 6)
+   ========================================================================== */
+
+:root {
+    --sensory-sepia: 0%;
+    --sensory-saturate: 1;
+    --sensory-contrast: 1;
+    --sensory-brightness: 1;
+}
+
+/* Combined filter for stacked mitigations (avoids CSS filter overwrite) */
+html.sensory-shield-active {
+    filter: sepia(var(--sensory-sepia, 0%)) 
+            saturate(var(--sensory-saturate, 1)) 
+            contrast(var(--sensory-contrast, 1)) 
+            brightness(var(--sensory-brightness, 1)) !important;
+}
+
+/* 1. Pause All Motion & CSS Keyframes */
+html.sensory-shield-pause-motion,
+html.sensory-shield-pause-motion * {
+    animation-play-state: paused !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+}
+
+/* 2. Warm Amber Low-Luminance Filter (Photophobia & Eye Strain) */
+html.sensory-shield-warm-filter {
+    --sensory-sepia: 35%;
+    --sensory-brightness: 0.9;
+}
+
+/* 3. Desaturate Aggressive Neon Colors */
+html.sensory-shield-desaturate {
+    --sensory-saturate: 0.55;
+}
+
+/* 4. Reduce Stark Contrast */
+html.sensory-shield-reduce-contrast {
+    --sensory-contrast: 0.82;
+    --sensory-brightness: 0.92;
+}
+
+/* Direct class fallbacks when sensory-shield-active is not present */
+html.sensory-shield-warm-filter:not(.sensory-shield-active) {
+    filter: sepia(35%) brightness(0.9) contrast(0.95) !important;
+}
+html.sensory-shield-desaturate:not(.sensory-shield-active) {
+    filter: saturate(0.55) !important;
+}
+html.sensory-shield-reduce-contrast:not(.sensory-shield-active) {
+    filter: contrast(0.82) brightness(0.92) !important;
+}
+
+/* 5. Soft Opt-in Warning Shield (Story 6) */
+.sensory-warning-shield-overlay {
+    z-index: 999990 !important;
+    background: rgba(15, 23, 42, 0.90) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 2px dashed #f59e0b !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 22px !important;
+    color: #f8fafc !important;
+    text-align: center !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6) !important;
+    box-sizing: border-box !important;
+}
+
+/* Viewport-level non-destructive centered modal overlay */
+.sensory-warning-shield-overlay.viewport-level {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 440px !important;
+    height: auto !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 0 9999px rgba(15, 23, 42, 0.5) !important;
+}
+
+.sensory-warning-shield-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #fbbf24 !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.sensory-warning-shield-subtitle {
+    font-size: 13px !important;
+    color: #94a3b8 !important;
+    margin-bottom: 12px !important;
+}
+
+.sensory-warning-shield-list {
+    text-align: left !important;
+    font-size: 13px !important;
+    color: #e2e8f0 !important;
+    line-height: 1.6 !important;
+    margin: 0 0 18px 0 !important;
+    padding-left: 20px !important;
+    list-style-type: disc !important;
+}
+
+.sensory-warning-shield-list li {
+    margin-bottom: 4px !important;
+}
+
+.sensory-warning-shield-btn {
+    background: #f59e0b !important;
+    color: #0f172a !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    padding: 8px 22px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background 0.15s ease, transform 0.1s ease !important;
+}
+
+.sensory-warning-shield-btn:hover {
+    background: #fbbf24 !important;
+    transform: scale(1.02) !important;
+}
